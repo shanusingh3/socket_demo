@@ -1,5 +1,5 @@
 
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   View,
@@ -9,11 +9,14 @@ import {
   FlatList,
   StyleSheet,
 } from 'react-native';
-import {io} from 'socket.io-client';
+import { io } from 'socket.io-client';
 
 // Replace with your IP or ngrok URL
 const socket = io('https://warner-shares-asylum-silly.trycloudflare.com', {
   transports: ['websocket'],
+  auth: {
+    userId: "1",
+  },
 });
 
 function App() {
@@ -48,13 +51,14 @@ function App() {
     }
 
     socket.emit('send_message', {
+      toUserId: '2',
       message,
     });
 
     setMessage('');
   };
 
-  const renderItem = ({item}: any) => (
+  const renderItem = ({ item }: any) => (
     <View style={styles.messageContainer}>
       <Text style={styles.message}>{item.message}</Text>
 

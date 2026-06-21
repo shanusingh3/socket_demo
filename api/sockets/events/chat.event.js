@@ -9,7 +9,28 @@ function registerChatEvents(io, socket) {
       payload.message
     );
 
-    io.emit(EVENTS.RECEIVE_MESSAGE, response);
+    socket.on(
+      "send_message",
+      payload => {
+        const {
+          toUserId,
+          message,
+        } = payload;
+
+        const fromUserId =
+          socket.handshake.auth.userId;
+
+        io.to(toUserId).emit(
+          "receive_message",
+          {
+            fromUserId,
+            message,
+          }
+        );
+      }
+    );
+
+
   });
 }
 

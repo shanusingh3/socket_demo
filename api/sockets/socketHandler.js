@@ -6,6 +6,19 @@ function socketHandler(io) {
 
     registerChatEvents(io, socket);
 
+    const userId =
+      socket.handshake.auth.userId;
+
+    socket.join(userId);
+
+    console.log(
+      `User ${userId} connected`
+    );
+
+    console.log(
+      `Joined room ${userId}`
+    );
+
     socket.on("disconnect", () => {
       console.log("Disconnected:", socket.id);
     });
