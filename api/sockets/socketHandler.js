@@ -9,6 +9,11 @@ function socketHandler(io) {
     socket.on("disconnect", () => {
       console.log("Disconnected:", socket.id);
     });
+
+    socket.onAny((event, ...args) => {
+      console.log("📥 EVENT:", event);
+      console.log("📦 PAYLOAD:", args);
+    });
   });
 }
 

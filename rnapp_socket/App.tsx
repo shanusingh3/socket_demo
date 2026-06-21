@@ -12,7 +12,7 @@ import {
 import {io} from 'socket.io-client';
 
 // Replace with your IP or ngrok URL
-const socket = io('http://192.168.1.100:3000', {
+const socket = io('https://warner-shares-asylum-silly.trycloudflare.com', {
   transports: ['websocket'],
 });
 
